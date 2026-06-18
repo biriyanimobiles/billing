@@ -6,22 +6,22 @@
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
-<title>MobiTrack â€“ Stock Manager</title>
+<title>MobiTrack – Stock Manager</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
 <style>
-/* â”€â”€ Reset & Base â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html{height:100%;-webkit-text-size-adjust:100%;}
 body{height:100%;font-family:'DM Sans',sans-serif;font-size:15px;color:#334155;background:#f0f4f8;-webkit-font-smoothing:antialiased;}
 ::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px;}
 input,select,textarea,button{font-family:inherit;-webkit-appearance:none;}
 
-/* â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Layout ───────────────────────────────────────────────────────────────── */
 #app{display:flex;min-height:100vh;min-height:100dvh;}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:40;}
 .overlay.open{display:block;}
 
-/* â”€â”€ SIDEBAR (desktop only) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── SIDEBAR (desktop only) ───────────────────────────────────────────────── */
 .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;z-index:50;transition:transform .28s cubic-bezier(.4,0,.2,1);}
 .main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;}
 .sidebar-logo{padding:18px 18px 14px;border-bottom:1px solid #f1f5f9;}
@@ -41,12 +41,12 @@ nav.sidebar-nav{flex:1;padding:6px 12px;display:flex;flex-direction:column;gap:1
 .user-name{font-size:12.5px;font-weight:700;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .user-role{font-size:10.5px;color:#94a3b8;}
 
-/* â”€â”€ TOPBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── TOPBAR ───────────────────────────────────────────────────────────────── */
 .topbar{height:54px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:30;}
 #menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;min-width:40px;min-height:40px;align-items:center;justify-content:center;}
 .topbar-right{display:flex;align-items:center;gap:10px;}
 
-/* â”€â”€ BOTTOM NAV (mobile) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── BOTTOM NAV (mobile) ──────────────────────────────────────────────────── */
 #bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;z-index:50;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -2px 12px rgba(0,0,0,.06);}
 .bnav-inner{display:flex;align-items:stretch;}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px 6px;border:none;background:none;cursor:pointer;color:#94a3b8;font-size:10px;font-weight:600;font-family:inherit;gap:3px;min-height:56px;transition:color .18s;-webkit-tap-highlight-color:transparent;}
@@ -62,10 +62,10 @@ nav.sidebar-nav{flex:1;padding:6px 12px;display:flex;flex-direction:column;gap:1
 .more-item{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:12px;background:#f8fafc;border:none;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;color:#334155;text-align:left;}
 .more-item.active{background:#eef2ff;color:#6366f1;}
 
-/* â”€â”€ CONTENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── CONTENT ──────────────────────────────────────────────────────────────── */
 .content{flex:1;padding:22px;max-width:1400px;width:100%;}
 
-/* â”€â”€ CARDS & STATS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── CARDS & STATS ────────────────────────────────────────────────────────── */
 .card{background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
 .stat-card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid #f1f5f9;transition:transform .2s;}
 .stat-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08);}
@@ -74,7 +74,7 @@ nav.sidebar-nav{flex:1;padding:6px 12px;display:flex;flex-direction:column;gap:1
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;margin-bottom:24px;}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
 
-/* â”€â”€ BUTTONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── BUTTONS ──────────────────────────────────────────────────────────────── */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;transition:all .18s;font-family:inherit;min-height:44px;}
 .btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 2px 8px rgba(99,102,241,.3);}
 .btn-primary:active{box-shadow:0 1px 4px rgba(99,102,241,.3);transform:scale(.98);}
@@ -88,13 +88,13 @@ nav.sidebar-nav{flex:1;padding:6px 12px;display:flex;flex-direction:column;gap:1
 .fab:active{transform:scale(.93);}
 .fab svg{width:22px;height:22px;flex-shrink:0;}
 
-/* â”€â”€ INPUTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── INPUTS ───────────────────────────────────────────────────────────────── */
 .input{width:100%;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:16px;outline:none;transition:border .18s;background:#fff;color:#334155;}
 .input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.1);}
 .label{display:block;font-size:11.5px;font-weight:600;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
 select.input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
 
-/* â”€â”€ TABLES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── TABLES ───────────────────────────────────────────────────────────────── */
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 table.tbl{width:100%;border-collapse:collapse;font-size:13px;}
 table.tbl th{padding:10px 14px;text-align:left;font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.6px;background:#f8fafc;border-bottom:1px solid #e2e8f0;}
@@ -102,7 +102,7 @@ table.tbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:mi
 table.tbl tr:last-child td{border-bottom:none;}
 table.tbl tr:hover td{background:#fafbff;}
 
-/* â”€â”€ MOBILE CARD LIST (replaces tables on mobile) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── MOBILE CARD LIST (replaces tables on mobile) ─────────────────────────── */
 .mcard{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid #f1f5f9;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
 .mcard-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
 .mcard-title{font-weight:700;font-size:14px;color:#0f172a;margin-bottom:2px;}
@@ -112,11 +112,11 @@ table.tbl tr:hover td{background:#fafbff;}
 .mcard-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;}
 .mcard-actions .btn{flex:1;justify-content:center;font-size:12.5px;padding:8px 10px;min-height:38px;}
 
-/* â”€â”€ BADGES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── BADGES ───────────────────────────────────────────────────────────────── */
 .badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;}
 .bg{background:#dcfce7;color:#15803d;}.br{background:#fee2e2;color:#dc2626;}.bi{background:#eef2ff;color:#6366f1;}.by{background:#fef3c7;color:#d97706;}
 
-/* â”€â”€ MODAL / BOTTOM SHEET â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── MODAL / BOTTOM SHEET ─────────────────────────────────────────────────── */
 .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:1000;padding:16px;backdrop-filter:blur(4px);}
 .modal-box{background:#fff;border-radius:20px;padding:26px;width:100%;max-width:520px;max-height:90dvh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.15);}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
@@ -124,13 +124,13 @@ table.tbl tr:hover td{background:#fafbff;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
 .form-grid .full{grid-column:1/-1;}
 
-/* â”€â”€ TABS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── TABS ─────────────────────────────────────────────────────────────────── */
 .tab{padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;border:none;background:none;font-family:inherit;color:#64748b;transition:all .2s;white-space:nowrap;min-height:38px;}
 .tab.active{background:#6366f1;color:#fff;}
 .tabs-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;gap:5px;flex-wrap:nowrap;padding-bottom:2px;}
 .tabs-scroll::-webkit-scrollbar{display:none;}
 
-/* â”€â”€ TOGGLE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── TOGGLE ───────────────────────────────────────────────────────────────── */
 .switch{position:relative;display:inline-block;width:44px;height:26px;}
 .switch input{opacity:0;width:0;height:0;}
 .slider{position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:22px;transition:.3s;}
@@ -138,17 +138,17 @@ table.tbl tr:hover td{background:#fafbff;}
 input:checked+.slider{background:#6366f1;}
 input:checked+.slider:before{transform:translateX(18px);}
 
-/* â”€â”€ PAGINATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── PAGINATION ───────────────────────────────────────────────────────────── */
 .pagination{display:flex;justify-content:center;gap:6px;padding:14px;border-top:1px solid #f1f5f9;flex-wrap:wrap;}
 .pg-btn{width:36px;height:36px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;color:#64748b;font-weight:600;cursor:pointer;font-family:inherit;font-size:12px;}
 .pg-btn.active{background:#6366f1;color:#fff;border-color:#6366f1;}
 
-/* â”€â”€ SEARCH â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── SEARCH ───────────────────────────────────────────────────────────────── */
 .search-wrap{position:relative;}
 .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);}
 .search-wrap .input{padding-left:36px;}
 
-/* â”€â”€ LOGIN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── LOGIN ────────────────────────────────────────────────────────────────── */
 #login-page{min-height:100vh;min-height:100dvh;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));}
 .login-card{background:#fff;border-radius:24px;padding:32px;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,.22);}
 .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;}
@@ -157,7 +157,7 @@ input:checked+.slider:before{transform:translateX(18px);}
 .pw-wrap{position:relative;}
 .pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:4px;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;}
 
-/* â”€â”€ MISC â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── MISC ─────────────────────────────────────────────────────────────────── */
 .filter-bar{display:flex;gap:10px;flex-wrap:wrap;}
 .profit-preview{background:#f0fdf4;border-radius:10px;padding:13px;border:1px solid #bbf7d0;margin-top:4px;}
 .cat-bar-bg{background:#f1f5f9;border-radius:4px;height:6px;}
@@ -176,7 +176,7 @@ code.mono{font-size:12px;background:#f8fafc;padding:2px 7px;border-radius:5px;fo
 .branch-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
 .branch-stat{background:#f8fafc;border-radius:8px;padding:8px 10px;}
 
-/* â”€â”€ MOBILE OVERRIDES (â‰¤ 768px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── MOBILE OVERRIDES (≤ 768px) ───────────────────────────────────────────── */
 @media(max-width:768px){
   /* Layout */
   .sidebar{transform:translateX(-100%);width:min(85vw,290px);}
@@ -343,7 +343,7 @@ code.mono{font-size:12px;background:#f8fafc;padding:2px 7px;border-radius:5px;fo
       <div style="margin-bottom:18px;">
         <label class="label">Password</label>
         <div class="pw-wrap">
-          <input class="input" id="login-pass" type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" style="padding-right:40px;" onkeydown="if(event.key==='Enter')doLogin()"/>
+          <input class="input" id="login-pass" type="password" placeholder="••••••••" style="padding-right:40px;" onkeydown="if(event.key==='Enter')doLogin()"/>
           <button class="pw-toggle" onclick="togglePw('login-pass')" type="button">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
@@ -353,16 +353,16 @@ code.mono{font-size:12px;background:#f8fafc;padding:2px 7px;border-radius:5px;fo
         Firebase shared mode: all users see the same saved data.
       </div>
       <div id="login-err" class="err-box hidden"></div>
-      <button class="btn btn-primary" id="login-btn" style="width:100%;justify-content:center;padding:12px;font-size:15px;" onclick="doLogin()">Sign In â†’</button>
+      <button class="btn btn-primary" id="login-btn" style="width:100%;justify-content:center;padding:12px;font-size:15px;" onclick="doLogin()">Sign In →</button>
       <div style="margin-top:20px;padding:16px;background:#f8fafc;border-radius:14px;border:1px solid #e2e8f0;">
-        <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Quick Login â€” Demo Accounts</div>
+        <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Quick Login — Demo Accounts</div>
         <div class="demo-grid">
           <button class="demo-btn" onclick="fillDemo('admin','admin123',this)"><span style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:3px;">Super Admin</span><span class="badge by">All Branches</span></button>
-          <button class="demo-btn" onclick="fillDemo('kochi','branch123',this)"><span style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:3px;">Head Office â€“ Kochi</span><span class="badge bi">Branch</span></button>
+          <button class="demo-btn" onclick="fillDemo('kochi','branch123',this)"><span style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:3px;">Head Office – Kochi</span><span class="badge bi">Branch</span></button>
           <button class="demo-btn" onclick="fillDemo('thrissur','branch123',this)"><span style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:3px;">Thrissur Branch</span><span class="badge" style="background:#f0f9ff;color:#0ea5e9;">Branch</span></button>
           <button class="demo-btn" onclick="fillDemo('kozhikode','branch123',this)"><span style="font-size:11.5px;font-weight:700;color:#334155;margin-bottom:3px;">Kozhikode Branch</span><span class="badge bg">Branch</span></button>
         </div>
-        <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:10px;">Click an account â†’ then Sign In</div>
+        <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:10px;">Click an account → then Sign In</div>
       </div>
     </div>
   </div>
@@ -421,7 +421,7 @@ code.mono{font-size:12px;background:#f8fafc;padding:2px 7px;border-radius:5px;fo
         <span style="font-size:12px;color:#94a3b8;" id="topbar-date"></span>
       </div>
     </div>
-    <div class="content" id="main-content"><div class="loading-bar"><div class="spinner"></div>Loadingâ€¦</div></div>
+    <div class="content" id="main-content"><div class="loading-bar"><div class="spinner"></div>Loading…</div></div>
   </div>
 </div>
 
@@ -443,9 +443,9 @@ window.mobitrackFirebaseReady = Promise.resolve({ initializeApp, getFirestore, d
 </script>
 
 <script>
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // CONFIG & STATE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 const CATEGORIES = ["Mobile Phones","Chargers","Earphones","Bluetooth Speakers","Power Banks","Screen Guards","Smart Watches","Mobile Covers","Accessories"];
 const BC = ["#6366f1","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899"];
 const bc = id => BC[((id||1)-1) % BC.length];
@@ -498,9 +498,9 @@ const SEED_DB = {
   sales: []
 };
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // API LAYER
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 function clone(x){ return JSON.parse(JSON.stringify(x)); }
 function firebaseConfigured(){
   return FIREBASE_CONFIG.apiKey && !FIREBASE_CONFIG.apiKey.startsWith("PASTE_") &&
@@ -741,10 +741,10 @@ const PUT    = (p,b)     => api("PUT",    p, b);
 const DELETE = path      => api("DELETE", path);
 const PATCH  = (p,b)     => api("PATCH",  p, b);
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // HELPERS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-const fmt = n => "â‚¹" + Number(n||0).toLocaleString("en-IN");
+// ═══════════════════════════════════════════════════════════════════════════
+const fmt = n => "₹" + Number(n||0).toLocaleString("en-IN");
 const today = () => new Date().toISOString().split("T")[0];
 const isSA  = () => USER?.role === "superadmin";
 
@@ -775,7 +775,7 @@ function toast(msg, type="success") {
 }
 
 function showLoading() {
-  document.getElementById("main-content").innerHTML = `<div class="loading-bar"><div class="spinner"></div>Loadingâ€¦</div>`;
+  document.getElementById("main-content").innerHTML = `<div class="loading-bar"><div class="spinner"></div>Loading…</div>`;
 }
 
 function openModal(title, html) {
@@ -799,9 +799,9 @@ function branchOpts(selId) {
 }
 function catOpts(sel) { return CATEGORIES.map(c=>`<option${c===sel?" selected":""}>${c}</option>`).join(""); }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // LOGIN
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 function fillDemo(u, p, btn) {
   document.getElementById("login-user").value = u;
   document.getElementById("login-pass").value = p;
@@ -815,7 +815,7 @@ async function doLogin() {
   const btn = document.getElementById("login-btn");
   const err = document.getElementById("login-err");
   err.classList.add("hidden");
-  btn.innerHTML = `<div class="spinner" style="border-top-color:#fff;border-color:rgba(255,255,255,.3);width:16px;height:16px;"></div> Signing inâ€¦`;
+  btn.innerHTML = `<div class="spinner" style="border-top-color:#fff;border-color:rgba(255,255,255,.3);width:16px;height:16px;"></div> Signing in…`;
   btn.disabled = true;
   try {
     const data = await POST("/api/login", {username:u, password:p});
@@ -833,7 +833,7 @@ async function doLogin() {
     err.textContent = e.message || "Cannot connect to server. Check API URL.";
     err.classList.remove("hidden");
   }
-  btn.innerHTML = "Sign In â†’"; btn.disabled = false;
+  btn.innerHTML = "Sign In →"; btn.disabled = false;
 }
 
 function doLogout() {
@@ -845,9 +845,9 @@ function doLogout() {
   document.querySelectorAll(".demo-btn").forEach(b=>b.classList.remove("sel"));
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // SIDEBAR
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 const PAGES = [
   {key:"dashboard",label:"Dashboard",icon:"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10"},
   {key:"products", label:"Products", icon:"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"},
@@ -869,7 +869,7 @@ function buildSidebar() {
     bb.innerHTML = `<div class="branch-badge-sidebar" style="background:#fef3c7;border:1px solid #fcd34d;"><div style="font-size:10px;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;">All Branches</div><div style="font-size:12.5px;font-weight:700;color:#92400e;">Super Admin View</div></div>`;
   } else {
     const brc = bc(BRANCH.id);
-    bb.innerHTML = `<div class="branch-badge-sidebar" style="background:${brc}16;border:1px solid ${brc}28;"><div style="font-size:10px;font-weight:700;color:${brc};text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px;">Current Branch</div><div style="font-size:13px;font-weight:700;color:#0f172a;">${BRANCH.name}</div><div style="font-size:11px;color:#64748b;">${BRANCH.city} Â· ${BRANCH.phone}</div></div>`;
+    bb.innerHTML = `<div class="branch-badge-sidebar" style="background:${brc}16;border:1px solid ${brc}28;"><div style="font-size:10px;font-weight:700;color:${brc};text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px;">Current Branch</div><div style="font-size:13px;font-weight:700;color:#0f172a;">${BRANCH.name}</div><div style="font-size:11px;color:#64748b;">${BRANCH.city} · ${BRANCH.phone}</div></div>`;
   }
   const nav = document.getElementById("sidebar-nav");
   nav.innerHTML = "";
@@ -885,7 +885,7 @@ function buildSidebar() {
   document.getElementById("user-name-lbl").textContent = USER.name;
   document.getElementById("user-role-lbl").textContent = sa ? "Super Admin" : "Branch Manager";
   const tb = document.getElementById("topbar-badge");
-  tb.innerHTML = sa ? `<span class="badge by">âš¡ SUPER ADMIN</span>` : `<span class="badge" style="background:${bc(BRANCH.id)}16;color:${bc(BRANCH.id)};border:1px solid ${bc(BRANCH.id)}28;">ðŸ“ ${BRANCH.city}</span>`;
+  tb.innerHTML = sa ? `<span class="badge by">⚡ SUPER ADMIN</span>` : `<span class="badge" style="background:${bc(BRANCH.id)}16;color:${bc(BRANCH.id)};border:1px solid ${bc(BRANCH.id)}28;">📍 ${BRANCH.city}</span>`;
   document.getElementById("topbar-date").textContent = new Date().toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
   buildBottomNav();
 }
@@ -949,9 +949,9 @@ function navigate(page) {
 function openSidebar(){document.getElementById("sidebar").classList.add("open");document.getElementById("overlay").classList.add("open");}
 function closeSidebar(){document.getElementById("sidebar").classList.remove("open");document.getElementById("overlay").classList.remove("open");}
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // RENDER ROUTER
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 async function renderPage() {
   showLoading();
   try {
@@ -966,7 +966,7 @@ async function renderPage() {
       case "settings":  renderSettings();        break;
     }
   } catch(e) {
-    document.getElementById("main-content").innerHTML = `<div style="padding:40px;text-align:center;"><div style="font-size:48px;margin-bottom:16px;">âš ï¸</div><div class="section-title" style="margin-bottom:8px;">Failed to load data</div><div style="color:#64748b;font-size:13px;margin-bottom:16px;">${e.message}</div><button class="btn btn-primary" onclick="renderPage()">Retry</button></div>`;
+    document.getElementById("main-content").innerHTML = `<div style="padding:40px;text-align:center;"><div style="font-size:48px;margin-bottom:16px;">⚠️</div><div class="section-title" style="margin-bottom:8px;">Failed to load data</div><div style="color:#64748b;font-size:13px;margin-bottom:16px;">${e.message}</div><button class="btn btn-primary" onclick="renderPage()">Retry</button></div>`;
   }
 }
 
@@ -1035,9 +1035,9 @@ function enhanceMobileTables(root=document) {
 
 window.addEventListener("resize",()=>enhanceMobileTables(document.getElementById("main-content")));
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // DASHBOARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 async function renderDashboard() {
   const d = await GET("/api/dashboard");
   const sa = isSA();
@@ -1060,12 +1060,12 @@ async function renderDashboard() {
     branchTable = `<div class="card" style="padding:20px;margin-bottom:20px;"><div class="section-title" style="margin-bottom:14px;">Branch Performance Overview</div><div class="table-wrap"><table class="tbl"><thead><tr><th>Branch</th><th>Products</th><th>Stock Value</th><th>Sales</th><th>Revenue</th><th>Profit</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   }
 
-  const lowRows = !d.low_stock?.length ? `<p style="color:#64748b;font-size:13px;">All products well stocked âœ“</p>`
-    : d.low_stock.map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;"><div><div style="font-weight:600;font-size:13px;">${p.name}</div><div style="font-size:11px;color:#94a3b8;">${p.brand}${sa?" Â· "+(ALL_BRANCHES.find(b=>b.id===p.branch_id)?.city||""):""}</div></div><span class="badge br">${p.stock} left</span></div>`).join("");
+  const lowRows = !d.low_stock?.length ? `<p style="color:#64748b;font-size:13px;">All products well stocked ✓</p>`
+    : d.low_stock.map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;"><div><div style="font-weight:600;font-size:13px;">${p.name}</div><div style="font-size:11px;color:#94a3b8;">${p.brand}${sa?" · "+(ALL_BRANCHES.find(b=>b.id===p.branch_id)?.city||""):""}</div></div><span class="badge br">${p.stock} left</span></div>`).join("");
 
-  const recSales = (d.recent_sales||[]).map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;"><div><div style="font-weight:600;font-size:13px;">${s.product_name}</div><div style="font-size:11px;color:#94a3b8;">${s.customer} Â· ${s.date}</div></div><div style="text-align:right;"><div style="font-weight:700;font-size:13px;">${fmt(s.price*s.quantity)}</div><div style="font-size:11px;color:#16a34a;font-weight:600;">+${fmt(s.profit)}</div></div></div>`).join("");
+  const recSales = (d.recent_sales||[]).map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;"><div><div style="font-weight:600;font-size:13px;">${s.product_name}</div><div style="font-size:11px;color:#94a3b8;">${s.customer} · ${s.date}</div></div><div style="text-align:right;"><div style="font-weight:700;font-size:13px;">${fmt(s.price*s.quantity)}</div><div style="font-size:11px;color:#16a34a;font-weight:600;">+${fmt(s.profit)}</div></div></div>`).join("");
 
-  const recPurch = (d.recent_purchases||[]).map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;"><div><div style="font-weight:600;font-size:13px;">${p.product_name}</div><div style="font-size:11px;color:#94a3b8;">${p.supplier} Â· ${p.date}</div></div><div style="text-align:right;"><div style="font-weight:700;font-size:13px;">${fmt(p.total)}</div><div style="font-size:11px;color:#94a3b8;">Ã—${p.quantity}</div></div></div>`).join("");
+  const recPurch = (d.recent_purchases||[]).map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;"><div><div style="font-weight:600;font-size:13px;">${p.product_name}</div><div style="font-size:11px;color:#94a3b8;">${p.supplier} · ${p.date}</div></div><div style="text-align:right;"><div style="font-weight:700;font-size:13px;">${fmt(p.total)}</div><div style="font-size:11px;color:#94a3b8;">×${p.quantity}</div></div></div>`).join("");
 
   setContent(`
     <div style="margin-bottom:18px;"><h1 class="page-title">Dashboard</h1><p style="color:#64748b;font-size:13px;margin-top:3px;">${sa?`Consolidated view across all ${ALL_BRANCHES.length} branches`:"Your branch at a glance"}</p></div>
@@ -1078,9 +1078,9 @@ async function renderDashboard() {
     </div>`);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // PRODUCTS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 let pSearch="", pCat="All", pBranch="All", pPage=1; const P_PER=10;
 
 async function renderProducts() {
@@ -1096,7 +1096,7 @@ async function renderProducts() {
   const rows = paged.map(p=>{
     const margin = p.purchase_price ? ((p.selling_price-p.purchase_price)/p.purchase_price*100).toFixed(1) : 0;
     return `<tr>
-      <td><div style="font-weight:600;font-size:13px;">${p.name}</div><div style="font-size:11px;color:#94a3b8;">${p.brand}${p.imei?` Â· IMEI:${p.imei.slice(-6)}`:""}</div></td>
+      <td><div style="font-weight:600;font-size:13px;">${p.name}</div><div style="font-size:11px;color:#94a3b8;">${p.brand}${p.imei?` · IMEI:${p.imei.slice(-6)}`:""}</div></td>
       ${sa?`<td>${bbadge(p.branch_id)}</td>`:""}
       <td><span class="badge bi">${p.category}</span></td>
       <td style="font-weight:600;">${fmt(p.purchase_price)}</td><td style="font-weight:600;">${fmt(p.selling_price)}</td>
@@ -1117,7 +1117,7 @@ async function renderProducts() {
     </div>
     <div class="card" style="padding:14px;margin-bottom:14px;">
       <div class="filter-bar">
-        <div class="search-wrap" style="flex:1;min-width:180px;">${ico(ICONS.search,15,"#94a3b8")}<input class="input" placeholder="Search name, brand, IMEIâ€¦" value="${pSearch}" oninput="pSearch=this.value;pPage=1;renderProducts()"></div>
+        <div class="search-wrap" style="flex:1;min-width:180px;">${ico(ICONS.search,15,"#94a3b8")}<input class="input" placeholder="Search name, brand, IMEI…" value="${pSearch}" oninput="pSearch=this.value;pPage=1;renderProducts()"></div>
         <select class="input" style="max-width:190px;" onchange="pCat=this.value;pPage=1;renderProducts()"><option value="All"${pCat==="All"?" selected":""}>All Categories</option>${catOpts(pCat)}</select>
         ${branchFilter}
       </div>
@@ -1144,8 +1144,8 @@ async function openProductModal(id) {
       <div><label class="label">Brand *</label><input class="input" id="pf-brand" value="${p?.brand||""}" placeholder="Samsung"></div>
       <div><label class="label">Category</label><select class="input" id="pf-cat">${catOpts(p?.category||CATEGORIES[0])}</select></div>
       <div class="full"><label class="label">IMEI (Mobile only)</label><input class="input" id="pf-imei" value="${p?.imei||""}" placeholder="15-digit IMEI"></div>
-      <div><label class="label">Purchase Price â‚¹ *</label><input class="input" type="number" id="pf-buy" value="${p?.purchase_price||""}" placeholder="0"></div>
-      <div><label class="label">Selling Price â‚¹ *</label><input class="input" type="number" id="pf-sell" value="${p?.selling_price||""}" placeholder="0"></div>
+      <div><label class="label">Purchase Price ₹ *</label><input class="input" type="number" id="pf-buy" value="${p?.purchase_price||""}" placeholder="0"></div>
+      <div><label class="label">Selling Price ₹ *</label><input class="input" type="number" id="pf-sell" value="${p?.selling_price||""}" placeholder="0"></div>
       <div><label class="label">Current Stock *</label><input class="input" type="number" id="pf-stk" value="${p?.stock||""}" placeholder="0"></div>
     </div>
     <div style="display:flex;gap:10px;margin-top:18px;">
@@ -1179,9 +1179,9 @@ async function delProduct(id) {
   catch(e){ toast(e.message,"error"); }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // PURCHASES
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 let puSearch="", puBranch="All", puPage=1; const PU_PER=10;
 let puAllProducts=[];
 
@@ -1206,7 +1206,7 @@ async function renderPurchases() {
       ${[["Total Purchases",purch.length],["Total Spent",fmt(rev)],["Units Bought",units]].map(([l,v])=>`<div class="stat-card"><div style="font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">${l}</div><div style="font-family:'Sora',sans-serif;font-weight:800;font-size:20px;">${v}</div></div>`).join("")}
     </div>
     <div class="card" style="padding:14px;margin-bottom:14px;"><div class="filter-bar">
-      <div class="search-wrap" style="flex:1;min-width:180px;">${ico(ICONS.search,15,"#94a3b8")}<input class="input" placeholder="Search purchasesâ€¦" value="${puSearch}" oninput="puSearch=this.value;puPage=1;renderPurchases()"></div>${bf}
+      <div class="search-wrap" style="flex:1;min-width:180px;">${ico(ICONS.search,15,"#94a3b8")}<input class="input" placeholder="Search purchases…" value="${puSearch}" oninput="puSearch=this.value;puPage=1;renderPurchases()"></div>${bf}
     </div></div>
     <div class="card" style="overflow:hidden;">
       <div class="table-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Product</th>${sa?"<th>Branch</th>":""}<th>Supplier</th><th>Invoice</th><th>Qty</th><th>Cost</th><th>Total</th></tr></thead><tbody>${rows||`<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:28px;">No purchases found</td></tr>`}</tbody></table></div>
@@ -1226,7 +1226,7 @@ function openPurchaseModal() {
       <div><label class="label">Purchase Date *</label><input class="input" type="date" id="pu-dt" value="${today()}"></div>
       <div><label class="label">Product *</label><select class="input" id="pu-prod" onchange="autoFillCost()">${prodOpts(bid)}</select></div>
       <div><label class="label">Quantity *</label><input class="input" type="number" id="pu-qty" value="1" min="1" oninput="calcPuTotal()"></div>
-      <div><label class="label">Cost per Unit â‚¹ *</label><input class="input" type="number" id="pu-cost" placeholder="0" oninput="calcPuTotal()"></div>
+      <div><label class="label">Cost per Unit ₹ *</label><input class="input" type="number" id="pu-cost" placeholder="0" oninput="calcPuTotal()"></div>
       <div class="full" id="pu-total"></div>
     </div>
     <div style="display:flex;gap:10px;margin-top:18px;">
@@ -1253,7 +1253,7 @@ function calcPuTotal(){
   if(box&&qty&&cost){
     const pid=+document.getElementById("pu-prod").value;
     const prod=puAllProducts.find(x=>x.id===pid);
-    box.innerHTML=`<div style="background:#f8fafc;border-radius:10px;padding:13px;"><div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#64748b;">Total Amount:</span><span style="font-weight:800;font-size:16px;">${fmt(qty*cost)}</span></div>${prod?`<div style="font-size:11px;color:#94a3b8;margin-top:3px;">Stock: ${prod.stock} â†’ ${prod.stock+qty} after purchase</div>`:""}</div>`;
+    box.innerHTML=`<div style="background:#f8fafc;border-radius:10px;padding:13px;"><div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#64748b;">Total Amount:</span><span style="font-weight:800;font-size:16px;">${fmt(qty*cost)}</span></div>${prod?`<div style="font-size:11px;color:#94a3b8;margin-top:3px;">Stock: ${prod.stock} → ${prod.stock+qty} after purchase</div>`:""}</div>`;
   } else if(box) box.innerHTML="";
 }
 async function savePurchase(){
@@ -1270,9 +1270,9 @@ async function savePurchase(){
   } catch(e){toast(e.message,"error");}
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // SALES
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 let slSearch="", slBranch="All", slPage=1; const SL_PER=10;
 let slAllProducts=[];
 
@@ -1293,10 +1293,10 @@ async function renderSales(){
       <button class="btn btn-primary page-add-btn" onclick="openSaleModal()">${ico(ICONS.plus,14,"#fff")} New Sale</button>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:13px;margin-bottom:18px;">
-      ${[["Total Sales",sl.length],["Total Revenue",fmt(rev)],["Total Profit",fmt(profit)],["Avg Profit/Sale",sl.length?fmt(Math.round(profit/sl.length)):"â‚¹0"]].map(([l,v])=>`<div class="stat-card"><div style="font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">${l}</div><div style="font-family:'Sora',sans-serif;font-weight:800;font-size:20px;">${v}</div></div>`).join("")}
+      ${[["Total Sales",sl.length],["Total Revenue",fmt(rev)],["Total Profit",fmt(profit)],["Avg Profit/Sale",sl.length?fmt(Math.round(profit/sl.length)):"₹0"]].map(([l,v])=>`<div class="stat-card"><div style="font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">${l}</div><div style="font-family:'Sora',sans-serif;font-weight:800;font-size:20px;">${v}</div></div>`).join("")}
     </div>
     <div class="card" style="padding:14px;margin-bottom:14px;"><div class="filter-bar">
-      <div class="search-wrap" style="flex:1;min-width:180px;">${ico(ICONS.search,15,"#94a3b8")}<input class="input" placeholder="Search salesâ€¦" value="${slSearch}" oninput="slSearch=this.value;slPage=1;renderSales()"></div>${bf}
+      <div class="search-wrap" style="flex:1;min-width:180px;">${ico(ICONS.search,15,"#94a3b8")}<input class="input" placeholder="Search sales…" value="${slSearch}" oninput="slSearch=this.value;slPage=1;renderSales()"></div>${bf}
     </div></div>
     <div class="card" style="overflow:hidden;">
       <div class="table-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Customer</th><th>Product</th>${sa?"<th>Branch</th>":""}<th>Qty</th><th>Price</th><th>Revenue</th><th>Profit</th></tr></thead><tbody>${rows||`<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:28px;">No sales found</td></tr>`}</tbody></table></div>
@@ -1307,7 +1307,7 @@ function setSlPage(n){slPage=n;renderSales();}
 
 function openSaleModal(){
   const sa=isSA(), bid=USER.branch_id||ALL_BRANCHES[0]?.id;
-  const avail=prods=>prods.filter(p=>(!sa&&p.branch_id===bid)||sa).filter(p=>p.stock>0).map(p=>`<option value="${p.id}">${p.name} (${p.brand}) â€” Stock: ${p.stock}</option>`).join("");
+  const avail=prods=>prods.filter(p=>(!sa&&p.branch_id===bid)||sa).filter(p=>p.stock>0).map(p=>`<option value="${p.id}">${p.name} (${p.brand}) — Stock: ${p.stock}</option>`).join("");
   openModal("New Sale Entry",`
     <div class="form-grid">
       ${sa?`<div class="full"><label class="label">Branch *</label><select class="input" id="sl-br" onchange="updateSlProds()">${branchOpts(bid)}</select></div>`:""}
@@ -1315,7 +1315,7 @@ function openSaleModal(){
       <div><label class="label">Sale Date *</label><input class="input" type="date" id="sl-dt" value="${today()}"></div>
       <div class="full"><label class="label">Product *</label><select class="input" id="sl-prod" onchange="autoFillPrice()">${avail(slAllProducts)}</select></div>
       <div><label class="label">Quantity *</label><input class="input" type="number" id="sl-qty" value="1" min="1" oninput="calcSlPreview()"><div style="font-size:11px;color:#94a3b8;margin-top:2px;" id="sl-hint"></div></div>
-      <div><label class="label">Selling Price â‚¹ *</label><input class="input" type="number" id="sl-price" oninput="calcSlPreview()"></div>
+      <div><label class="label">Selling Price ₹ *</label><input class="input" type="number" id="sl-price" oninput="calcSlPreview()"></div>
       <div class="full" id="sl-prev"></div>
     </div>
     <div style="display:flex;gap:10px;margin-top:18px;">
@@ -1326,7 +1326,7 @@ function openSaleModal(){
 }
 function updateSlProds(){
   const bid=+document.getElementById("sl-br")?.value;
-  document.getElementById("sl-prod").innerHTML=slAllProducts.filter(p=>p.branch_id===bid&&p.stock>0).map(p=>`<option value="${p.id}">${p.name} (${p.brand}) â€” Stock: ${p.stock}</option>`).join("");
+  document.getElementById("sl-prod").innerHTML=slAllProducts.filter(p=>p.branch_id===bid&&p.stock>0).map(p=>`<option value="${p.id}">${p.name} (${p.brand}) — Stock: ${p.stock}</option>`).join("");
   document.getElementById("sl-price").value="";
   document.getElementById("sl-prev").innerHTML="";
   autoFillPrice();
@@ -1358,9 +1358,9 @@ async function saveSale(){
   } catch(e){toast(e.message,"error");}
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // REPORTS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 let rTab="stock", rSearch="", rBranch="All";
 
 async function renderReports(){
@@ -1393,7 +1393,7 @@ async function renderReports(){
     const rows=sl.filter(s=>!q||(s.customer+s.product_name).toLowerCase().includes(q)).map(s=>`<tr><td style="font-size:12px;color:#64748b;">${s.date}</td><td>${s.customer}</td><td style="font-weight:600;">${s.product_name}</td>${sa?`<td>${bbadge(s.branch_id)}</td>`:""}<td>${s.quantity}</td><td>${fmt(s.price)}</td><td style="font-weight:700;">${fmt(s.price*s.quantity)}</td><td><span class="badge ${s.profit>=0?"bg":"br"}">${s.profit>=0?"+":""}${fmt(s.profit)}</span></td></tr>`).join("");
     tableHtml=`<table class="tbl"><thead><tr><th>Date</th><th>Customer</th><th>Product</th>${sa?"<th>Branch</th>":""}<th>Qty</th><th>Price</th><th>Revenue</th><th>Profit</th></tr></thead><tbody>${rows}</tbody></table>`;
   } else if(rTab==="profit"){
-    const rows=profitRows.filter(s=>!q||s.product_name.toLowerCase().includes(q)).map(s=>`<tr><td style="font-weight:600;">${s.product_name}</td>${sa?`<td>${bbadge(s.branch_id)}</td>`:""}<td>${s.units_sold}</td><td>${fmt(s.revenue)}</td><td>${fmt(s.total_cost)}</td><td><span class="badge bg">${fmt(s.profit)}</span></td><td>${s.revenue?`${(s.profit/s.revenue*100).toFixed(1)}%`:"â€”"}</td></tr>`).join("");
+    const rows=profitRows.filter(s=>!q||s.product_name.toLowerCase().includes(q)).map(s=>`<tr><td style="font-weight:600;">${s.product_name}</td>${sa?`<td>${bbadge(s.branch_id)}</td>`:""}<td>${s.units_sold}</td><td>${fmt(s.revenue)}</td><td>${fmt(s.total_cost)}</td><td><span class="badge bg">${fmt(s.profit)}</span></td><td>${s.revenue?`${(s.profit/s.revenue*100).toFixed(1)}%`:"—"}</td></tr>`).join("");
     tableHtml=`<table class="tbl"><thead><tr><th>Product</th>${sa?"<th>Branch</th>":""}<th>Units Sold</th><th>Revenue</th><th>Cost</th><th>Profit</th><th>Margin</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
 
@@ -1402,14 +1402,14 @@ async function renderReports(){
     ${profitStats}
     <div class="card" style="padding:14px;margin-bottom:14px;"><div style="display:flex;gap:8px;flex-direction:column;">
       <div class="tabs-scroll">${tabs.map(t=>`<button class="tab${rTab===t.k?" active":""}" onclick="rTab='${t.k}';renderReports()">${t.l}</button>`).join("")}</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">${bf}<div class="search-wrap" style="flex:1;min-width:160px;">${ico(ICONS.search,14,"#94a3b8")}<input class="input" style="padding-left:30px;" placeholder="Searchâ€¦" value="${rSearch}" oninput="rSearch=this.value;renderReports()"></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">${bf}<div class="search-wrap" style="flex:1;min-width:160px;">${ico(ICONS.search,14,"#94a3b8")}<input class="input" style="padding-left:30px;" placeholder="Search…" value="${rSearch}" oninput="rSearch=this.value;renderReports()"></div></div>
     </div></div>
     <div class="card" style="overflow:hidden;"><div class="table-wrap">${tableHtml}</div></div>`);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // BRANCHES
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 async function renderBranches(){
   ALL_BRANCHES = await GET("/api/branches");
   ALL_USERS = await GET("/api/users");
@@ -1428,8 +1428,8 @@ async function renderBranches(){
         </div>
         <label class="switch"><input type="checkbox" ${b.active?"checked":""} onchange="toggleBranch(${b.id})"><span class="slider"></span></label>
       </div>
-      <div style="font-size:12.5px;color:#64748b;margin-bottom:4px;">ðŸ“ž ${b.phone||"â€”"}</div>
-      <div style="font-size:12.5px;color:#64748b;margin-bottom:14px;">ðŸ“ ${b.address||"â€”"}</div>
+      <div style="font-size:12.5px;color:#64748b;margin-bottom:4px;">📞 ${b.phone||"—"}</div>
+      <div style="font-size:12.5px;color:#64748b;margin-bottom:14px;">📍 ${b.address||"—"}</div>
       ${bu.length?`<div style="border-top:1px solid #f1f5f9;padding-top:12px;margin-bottom:12px;"><div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Branch Users</div>${usersList}</div>`:""}
       <div style="display:flex;gap:6px;">
         <button class="btn btn-secondary" style="flex:1;justify-content:center;" onclick="openBranchModal(${b.id})">${ico(ICONS.edit,13)} Edit</button>
@@ -1480,16 +1480,16 @@ async function saveBranch(id){
   }catch(e){toast(e.message,"error");}
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // USERS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 async function renderUsers(){
   ALL_USERS=await GET("/api/users");
   const rows=ALL_USERS.map(u=>{
     const b=u.branch_id?ALL_BRANCHES.find(x=>x.id===u.branch_id):null;
     const ini=u.name.split(" ").map(w=>w[0]).join("").toUpperCase().slice(0,2);
     const c=bc(u.branch_id||1), c2=bc((u.branch_id||1)+2);
-    return `<tr><td><div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,${c},${c2});display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;flex-shrink:0;">${ini}</div><div><div style="font-weight:700;font-size:13px;">${u.name}</div><div style="font-size:11px;color:#94a3b8;">${u.email||"â€”"}</div></div></div></td><td><code class="mono">${u.username}</code></td><td><span class="badge ${u.role==="superadmin"?"by":"bi"}">${u.role==="superadmin"?"Super Admin":"Branch Manager"}</span></td><td>${b?bbadge(b.id):`<span style="color:#94a3b8;font-size:12px;">All Branches</span>`}</td><td><label class="switch"><input type="checkbox" ${u.active?"checked":""} onchange="toggleUser(${u.id})"><span class="slider"></span></label></td><td><div style="display:flex;gap:5px;"><button class="btn btn-secondary" style="padding:5px 9px;" onclick="openUserModal(${u.id})">${ico(ICONS.edit,13)}</button><button class="btn btn-danger" style="padding:5px 9px;" onclick="delUser(${u.id})">${ico(ICONS.trash,13)}</button></div></td></tr>`;
+    return `<tr><td><div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,${c},${c2});display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;flex-shrink:0;">${ini}</div><div><div style="font-weight:700;font-size:13px;">${u.name}</div><div style="font-size:11px;color:#94a3b8;">${u.email||"—"}</div></div></div></td><td><code class="mono">${u.username}</code></td><td><span class="badge ${u.role==="superadmin"?"by":"bi"}">${u.role==="superadmin"?"Super Admin":"Branch Manager"}</span></td><td>${b?bbadge(b.id):`<span style="color:#94a3b8;font-size:12px;">All Branches</span>`}</td><td><label class="switch"><input type="checkbox" ${u.active?"checked":""} onchange="toggleUser(${u.id})"><span class="slider"></span></label></td><td><div style="display:flex;gap:5px;"><button class="btn btn-secondary" style="padding:5px 9px;" onclick="openUserModal(${u.id})">${ico(ICONS.edit,13)}</button><button class="btn btn-danger" style="padding:5px 9px;" onclick="delUser(${u.id})">${ico(ICONS.trash,13)}</button></div></td></tr>`;
   }).join("");
   const sm=[{l:"Total Users",v:ALL_USERS.length},{l:"Active Users",v:ALL_USERS.filter(u=>u.active).length,c:"#10b981"},{l:"Branch Managers",v:ALL_USERS.filter(u=>u.role==="branch").length,c:"#6366f1"},{l:"Super Admins",v:ALL_USERS.filter(u=>u.role==="superadmin").length,c:"#d97706"}];
   setContent(`
@@ -1519,13 +1519,13 @@ function openUserModal(id){
     <div class="form-grid">
       <div class="full"><label class="label">Full Name *</label><input class="input" id="uf-name" value="${u?.name||""}" placeholder="e.g. Arun Menon"></div>
       <div><label class="label">Username *</label><input class="input" id="uf-user" value="${u?.username||""}" placeholder="thrissur_mgr" ${id?"readonly":""}></div>
-      <div><label class="label">Password *</label><div class="pw-wrap"><input class="input" type="password" id="uf-pass" value="${u?.password||""}" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" style="padding-right:36px;"><button class="pw-toggle" onclick="togglePw('uf-pass')">${ico(ICONS.eye,15,"#94a3b8")}</button></div></div>
+      <div><label class="label">Password *</label><div class="pw-wrap"><input class="input" type="password" id="uf-pass" value="${u?.password||""}" placeholder="••••••••" style="padding-right:36px;"><button class="pw-toggle" onclick="togglePw('uf-pass')">${ico(ICONS.eye,15,"#94a3b8")}</button></div></div>
       <div class="full"><label class="label">Email</label><input class="input" type="email" id="uf-email" value="${u?.email||""}" placeholder="user@mobitrack.in"></div>
       <div><label class="label">Role *</label><select class="input" id="uf-role" onchange="updateRoleSel()"><option value="branch"${(u?.role||"branch")==="branch"?" selected":""}>Branch Manager</option><option value="superadmin"${u?.role==="superadmin"?" selected":""}>Super Admin</option></select></div>
       ${branchDiv}
       <div style="display:flex;align-items:center;gap:10px;"><label class="switch"><input type="checkbox" id="uf-active" ${u?.active!==false?"checked":""}><span class="slider"></span></label><span style="font-size:13px;color:#64748b;">Account Active</span></div>
     </div>
-    <div id="uf-sa-warn" class="hidden" style="margin-top:12px;padding:10px;background:#fffbeb;border-radius:8px;border:1px solid #fcd34d;font-size:12.5px;color:#92400e;">âš ï¸ Super Admin has full access to all branches and data.</div>
+    <div id="uf-sa-warn" class="hidden" style="margin-top:12px;padding:10px;background:#fffbeb;border-radius:8px;border:1px solid #fcd34d;font-size:12.5px;color:#92400e;">⚠️ Super Admin has full access to all branches and data.</div>
     <div style="display:flex;gap:10px;margin-top:18px;">
       <button class="btn btn-secondary" style="flex:1;" onclick="closeModal()">Cancel</button>
       <button class="btn btn-primary" style="flex:1;" onclick="saveUser(${id||0})">${id?"Save Changes":"Create User"}</button>
@@ -1548,12 +1548,12 @@ async function saveUser(id){
   }catch(e){toast(e.message,"error");}
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 // SETTINGS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════════════════
 function renderSettings(){
   const u=USER, sa=isSA(), branch=ALL_BRANCHES.find(b=>b.id===u.branch_id);
-  const info=[["Name",u.name],["Username",u.username],["Role",sa?"Super Admin":"Branch Manager"],["Branch",sa?"All Branches":branch?.name||"â€”"],["Email",u.email||"â€”"],["API Server",API]];
+  const info=[["Name",u.name],["Username",u.username],["Role",sa?"Super Admin":"Branch Manager"],["Branch",sa?"All Branches":branch?.name||"—"],["Email",u.email||"—"],["API Server",API]];
   setContent(`
     <div style="margin-bottom:18px;"><h1 class="page-title">Settings</h1></div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;">
@@ -1563,17 +1563,17 @@ function renderSettings(){
           <div><label class="label">Shop Name</label><input class="input" id="st-name" value="MobiTrack Store"></div>
           <div><label class="label">Phone</label><input class="input" id="st-phone" value="9876543210"></div>
           <div><label class="label">GST Number</label><input class="input" id="st-gst" value="29ABCDE1234F1Z5"></div>
-          <div><label class="label">Currency</label><input class="input" id="st-curr" value="â‚¹" style="max-width:80px;"></div>
+          <div><label class="label">Currency</label><input class="input" id="st-curr" value="₹" style="max-width:80px;"></div>
           <div><label class="label">Address</label><textarea class="input" style="resize:vertical;min-height:72px;">123 Main Street, Kochi, Kerala</textarea></div>
-          <button class="btn btn-primary" style="justify-content:center;" onclick="this.innerHTML='âœ“ Saved!';setTimeout(()=>this.innerHTML='Save Settings',2500)">Save Settings</button>
+          <button class="btn btn-primary" style="justify-content:center;" onclick="this.innerHTML='✓ Saved!';setTimeout(()=>this.innerHTML='Save Settings',2500)">Save Settings</button>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:18px;">
         <div class="card" style="padding:22px;">
           <div class="section-title" style="margin-bottom:14px;">Change Password</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
-            <div><label class="label">Current Password</label><input class="input" type="password" id="cp-cur" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"></div>
-            <div><label class="label">New Password</label><input class="input" type="password" id="cp-new" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"></div>
+            <div><label class="label">Current Password</label><input class="input" type="password" id="cp-cur" placeholder="••••••••"></div>
+            <div><label class="label">New Password</label><input class="input" type="password" id="cp-new" placeholder="••••••••"></div>
             <button class="btn btn-secondary" style="justify-content:center;" onclick="changePassword()">Update Password</button>
           </div>
         </div>
